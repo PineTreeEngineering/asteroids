@@ -18,7 +18,6 @@ def main():
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     print(f"Starting Asteroids with pygame version: {pygame.version.ver}")
     print(f"Screen width: {SCREEN_WIDTH}\nScreen height: {SCREEN_HEIGHT}")
-    black = (0, 0, 0)
 
     x = SCREEN_WIDTH / 2
     y = SCREEN_HEIGHT / 2
@@ -47,7 +46,7 @@ def main():
                 return
 
         dt = clock.tick(60) / 1000
-        pygame.Surface.fill(screen, black)
+        pygame.Surface.fill(screen, "black")
         updatable.update(dt)
 
         for obj in drawable:
@@ -63,8 +62,8 @@ def main():
             for shot in shots:
                 if shot.collides_with(obj):
                     log_event("asteroid_shot")
-                    pygame.sprite.Sprite.kill(obj)
-                    pygame.sprite.Sprite.kill(shot)
+                    obj.split()
+                    shot.kill()
 
         pygame.display.flip()
         log_state()
